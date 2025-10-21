@@ -1,0 +1,96 @@
+Projekt specifikáció – Offline „Koktél csempék” Android alkalmazás
+===========================================================
+
+🎯 Cél
+------
+Egy egyszerű, offline Android alkalmazás fejlesztése, amely 13 koktélt jelenít meg álló téglalap alakú csempéken képpel és névvel.
+A főképernyőn egyszerre legalább 4 csempe látszódjon (pl. 2 oszlop × 2 sor), a lista görgethető legyen.
+Csempére bökve a kártya felnagyítva megnyílik, és megjeleníti a koktél hozzávalóit, elkészítését és díszítését.
+A részletes nézet 20 másodperc után automatikusan bezáródik, akkor is, ha a felhasználó nem nyúl hozzá.
+
+⚙️ Technikai követelmények
+--------------------------
+- Platform: Android
+- Fejlesztés: Kotlin + Android Studio (Material Design alapokon)
+- Minimum SDK: Android 8.0 (API 26)
+- Offline működés: az app ne kérjen internet-hozzáférést
+- Adatok és képek forrása a repóban:
+  - Koktéladatok: Coctaildata/cocktails.json
+  - Képek: pictures/ mappa (fájlnevek az imageName mező szerint)
+
+🧱 Funkciók
+-----------
+
+1️⃣ Főképernyő – Csempe-rács (Grid)
+-----------------------------------
+- 13 koktél csempék formájában jelenjen meg.
+- Csempék álló téglalap formájúak legyenek, hogy a képek arányosan és esztétikusan jelenjenek meg (pl. 3:4 arány).
+- Portré módban legalább 4 csempe legyen látható egyszerre (pl. 2 oszlop × 2 sor).
+- Függőlegesen görgethető lista.
+- Minden csempén:
+  - koktél kép (drawable-ból, centerCrop megjelenítéssel)
+  - koktél név (alatta, félkövér betűvel)
+- Letisztult, modern Material Design megjelenés (CardView vagy Compose megfelelője).
+- A csempék között legyen enyhe térköz (kb. 8–12 dp margin/padding).
+
+2️⃣ Részletnézet (felugró ablak / felnagyítás)
+---------------------------------------------
+- Csempére kattintva a kártya felnagyítva megnyílik (scale + fade animáció vagy DialogFragment).
+- A részletes nézetben jelenjen meg:
+  - name – koktél neve
+  - tagline – rövid leírás / ízprofil
+  - ingredients – hozzávalók listája (mennyiség + megnevezés)
+  - preparation – elkészítés módja
+  - garnish – díszítés
+- Bezárási lehetőségek:
+  - X gomb
+  - háttérre koppintás
+  - vissza gomb
+  - automatikusan 20 másodperc után, ha a felhasználó nem interaktál
+
+3️⃣ Reszponzivitás
+------------------
+- Portréban 2 oszlop, tájképen 3–4 oszlop.
+- Csempék mérete és aránya automatikusan igazodjon a képernyőhöz.
+- Görgetés legyen folyékony és akadásmentes.
+
+🧩 Adatszerkezet
+----------------
+A koktéladatok a Coctaildata/cocktails.json fájlban találhatók, a képek neve megegyezik az imageName mezővel a pictures/ mappában.
+Fejlesztéskor ezeket az app res/drawable/ könyvtárába kell másolni.
+
+JSON példa:
+[
+  {
+    "id": "bison-on-the-beach",
+    "name": "Bison on the Beach",
+    "tagline": "Trópusi, ananászos long drink Żubrówka Bison Grass vodkával.",
+    "imageName": "bison-on-the-beach",
+    "glass": "Highball",
+    "ingredients": [
+      { "amount": "40 ml", "item": "Żubrówka Bison Grass vodka" },
+      { "amount": "15 ml", "item": "Friss citromlé" },
+      { "amount": "20 ml", "item": "Kókusz szirup" },
+      { "amount": "80 ml", "item": "Ananászlé" },
+      { "amount": "Felöntéshez", "item": "Sprite" }
+    ],
+    "preparation": "Töltsd meg a pohár háromnegyedét jéggel, add hozzá az összes hozzávalót (a Sprite kivételével) és keverd össze, majd töltsd fel Sprite-tal.",
+    "garnish": "Narancsdarabbal díszítve"
+  }
+]
+
+✅ Elfogadási feltételek
+------------------------
+- A főképernyőn legalább 4 álló téglalap alakú csempe látható.
+- A lista görgethető, és a 13 koktél mind megjelenik.
+- Csempére kattintva megnyílik a részletes nézet.
+- A részletes nézet automatikusan bezáródik 20 másodperc után, akkor is, ha nincs interakció.
+- Az app offline működik (nincs hálózati hozzáférés).
+- A projekt Android Studio-ban buildelhető és futtatható emulátoron vagy fizikai eszközön.
+
+📦 Átadandók
+------------
+- Teljes Android Studio projekt (Kotlin forráskód)
+- assets/Coctaildata/cocktails.json – adatfájl
+- res/drawable/ – a pictures/ mappából átmásolt képek
+- Rövid README (build és futtatás lépései)
